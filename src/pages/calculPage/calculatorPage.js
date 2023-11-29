@@ -1,47 +1,62 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { firstInput, secondInput, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, cleanInputs } from "../../store/calculSlice"
+import { firstInput, secondInput, PlusNumbers, subtractNumbers, multiplyNumbers, divideNumbers, cleanInputs, cleanResult } from "../../store/calculSlice"
 
 
 function CalculPage() {
   const dispatch = useDispatch()
-  const { input1, input2, result } = useSelector((state) => state.mathSlice)
+  const [input1, setInput1] = useState("")
+  const [input2, setInput2] = useState("")
 
-  const plus = () => {
-    dispatch(addNumbers({ num1: input1, num2: input2 }))
+  const { result } = useSelector(state => state.calculSlice)
+
+  const doAction = (event) => {
+    if (input1 !== "" && input2 !== "") {
+      switch (event.target.innerText) {
+        case "+":
+          dispatch(PlusNumbers({ input1, input2 }))
+          break;
+        case "-":
+          dispatch(subtractNumbers({ input1, input2 }))
+          break;
+        case "*":
+          dispatch(multiplyNumbers({ input1, input2 }))
+          break;
+        case "/":
+          dispatch(divideNumbers({ input1, input2 }))
+          break;
+        case "cls":
+          setInput1("")
+          setInput2("")
+          dispatch(cleanResult())
+          break;
+        default:
+          break;
+      }
+    } else {
+      alert("Заполните все поля!")
+    }
   }
 
-  const minus = () => {
-    dispatch(subtractNumbers({ num1: input1, num2: input2 }))
-  }
 
-  const multiply = () => {
-    dispatch(multiplyNumbers({ num1: input1, num2: input2 }))
-  }
 
-  const devide = () => {
-    dispatch(divideNumbers({ num1: input1, num2: input2 }))
-  }
-  const cls = () => {
-    dispatch(cleanInputs({ num1: input1, num2: input2 }))
-  }
+
 
   return (
     <div className="container">
       <h1>math calculator</h1>
       <div className="calculator">
         <div className="inputs">
-          <input placeholder="enter first number" value={input1} onChange={(event) => dispatch(firstInput(event.target.value))} />
-          <input placeholder="enter second number" value={input2} onChange={(event) => dispatch(secondInput(event.target.value))} />
-
+          <input type="number" placeholder="enter first number" value={input1} onChange={(event) => setInput1(event.target.value)} />
+          <input type="number" placeholder="enter second number" value={input2} onChange={(event) => setInput2(event.target.value)} />
         </div>
 
         <div className="buttons">
-          <button onClick={plus}>+</button>
-          <button onClick={minus}>-</button>
-          <button onClick={multiply}>*</button>
-          <button onClick={devide}>/</button>
-          <button onClick={cls}>cls</button>
+          <button onClick={doAction}>+</button>
+          <button onClick={doAction}>-</button>
+          <button onClick={doAction}>*</button>
+          <button onClick={doAction}>/</button>
+          <button onClick={doAction}>cls</button>
         </div>
       </div>
       <p>answer: {result}</p>

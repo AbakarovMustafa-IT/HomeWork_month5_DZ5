@@ -5,9 +5,6 @@ import UsersPage from './pages/usersPage/UsersPage';
 import CalculPage from './pages/calculPage/calculatorPage';
 
 
-
-
-
 const App = () => {
   return (
     <div className='App'>

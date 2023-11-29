@@ -1,45 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const calculSlice = createSlice({
-  name: "mathSlice",
+  name: "calculSlice",
   initialState: {
-    input1: "",
-    input2: "",
+    // input1: "",
+    // input2: "",
     result: 0,
   },
   reducers: {
-    firstInput: (state, action) => {
-      state.input1 = parseInt(action.payload, 10) || 0;
-    },
-    secondInput: (state, action) => {
-      state.input2 = parseInt(action.payload, 10) || 0;
-    },
-    addNumbers: (state, action) => {
-      const { num1, num2 } = action.payload;
-      state.result = num1 + num2;
+    // firstInput: (state, action) => {
+    //   state.input1 = action.payload;
+    // },
+    // secondInput: (state, action) => {
+    //   state.input2 = action.payload;
+    // },
+    PlusNumbers: (state, action) => {
+      state.result = Number(action.payload.input1) + Number(action.payload.input2);
     },
     subtractNumbers: (state, action) => {
-      const { num1, num2 } = action.payload;
-      state.result = num1 - num2;
+      state.result = Number(action.payload.input1) - Number(action.payload.input2);
     },
     multiplyNumbers: (state, action) => {
-      const { num1, num2 } = action.payload;
-      state.result = num1 * num2;
+      state.result = Number(action.payload.input1) * Number(action.payload.input2);
     },
     divideNumbers: (state, action) => {
-      const { num1, num2 } = action.payload;
-      state.result = num1 / num2;
+      state.result = Number(action.payload.input1) / Number(action.payload.input2);
     },
-    cleanInputs: (state, action) => {
-      state.input1 = ''
-      state.input2 = ''
-      state.result = ''
-      alert('clean')
+    cleanResult: (state, action) => {
+      state.result = ""
     }
   },
 });
 
-export const { firstInput, secondInput, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, cleanInputs } =
+export const { firstInput, secondInput, PlusNumbers, subtractNumbers, multiplyNumbers, divideNumbers, cleanResult } =
   calculSlice.actions;
 
-export default calculSlice.reducers
+export default calculSlice.reducer
