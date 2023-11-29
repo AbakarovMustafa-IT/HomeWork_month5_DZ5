@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { firstInput, secondInput, PlusNumbers, subtractNumbers, multiplyNumbers, divideNumbers, cleanInputs, cleanResult } from "../../store/calculSlice"
+import { PlusNumbers, subtractNumbers, multiplyNumbers, divideNumbers, cleanInputs, cleanResult } from "../../store/calculSlice"
 
 
 function CalculPage() {

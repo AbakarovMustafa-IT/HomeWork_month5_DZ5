@@ -3,17 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const calculSlice = createSlice({
   name: "calculSlice",
   initialState: {
-    // input1: "",
-    // input2: "",
     result: 0,
   },
   reducers: {
-    // firstInput: (state, action) => {
-    //   state.input1 = action.payload;
-    // },
-    // secondInput: (state, action) => {
-    //   state.input2 = action.payload;
-    // },
     PlusNumbers: (state, action) => {
       state.result = Number(action.payload.input1) + Number(action.payload.input2);
     },
